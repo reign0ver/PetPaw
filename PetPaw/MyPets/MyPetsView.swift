@@ -9,37 +9,44 @@ import SwiftUI
 
 struct MyPetsView: View {
     @State var pets: [Pet] = [
-        Pet(name: "Martina", kind: .cat),
-        Pet(name: "Luchito", kind: .cat),
-        Pet(name: "Chispita", kind: .cat),
-        Pet(name: "Adam", kind: .cat),
-        Pet(name: "Lalo (el de Socorro)", kind: .dog),
-        Pet(name: "Lalo (el de Socorro)", kind: .dog),
-        Pet(name: "Lalo (el de Socorro)", kind: .dog)
+        Pet(name: "Martina", breed: .cat),
+        Pet(name: "Luchito", breed: .cat),
+        Pet(name: "Chispita", breed: .cat),
+        Pet(name: "Adam", breed: .cat),
+        Pet(name: "Lalo (el de Socorro)", breed: .dog),
+        Pet(name: "Lalo (el de Socorro)", breed: .dog),
+        Pet(name: "Lalo (el de Socorro)", breed: .dog)
     ]
     
     var layout: [GridItem] = [
         GridItem(.adaptive(minimum: 100, maximum: 140), spacing: 36)
     ]
     
+    @State private var isPresented = false
+    
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 LazyVGrid(columns: layout, spacing: 36) {
                     ForEach(pets) { pet in
-                        PetCardView(pet: pet)
+                        PetCardView(pet: pet, cardSize: nil)
+                            .onTapGesture {
+                                // TODOSITO
+                            }
                     }
                 }
                 .padding()
             }
             .navigationTitle("My Pets")
+            .sheet(isPresented: $isPresented, content: {
+                AddKindOfPetView(isPresented: $isPresented)
+            })
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        AddKindOfPetView()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+                    Button(
+                        action: { isPresented = true },
+                        label: { Image(systemName: "plus") }
+                    )
                 }
             }
         }
@@ -49,20 +56,7 @@ struct MyPetsView: View {
 struct Pet: Identifiable {
     let id = UUID()
     let name: String
-    let kind: PetKind
-    
-    var emoji: String {
-        switch kind {
-        case .cat:
-            "🐱"
-        case .dog:
-            "🐶"
-        }
-    }
-}
-
-enum PetKind {
-    case cat, dog
+    let breed: Breed
 }
 
 #Preview {

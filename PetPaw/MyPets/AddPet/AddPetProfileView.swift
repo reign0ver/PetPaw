@@ -12,7 +12,6 @@ struct AddPetProfileView: View {
     @State private var name = ""
     @State private var birthday = Date.now
     @State private var gender = "Boy"
-    @State private var nickname = ""
     
     private var genderList = [
         "Boy",
@@ -22,36 +21,22 @@ struct AddPetProfileView: View {
     
     var body: some View {
         Form {
-            ZStack {
-                VStack {
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 80, height: 80)
-                    
-                    Text("Add photo")
-                    
-                    Text("Optional")
-                        .font(.caption)
-                        .italic()
-                }
-                
+            Section {
                 Button(
-                    action: {
-                        print("Add photo action")
-                    },
-                    label: {}
+                    action: {},
+                    label: { addProfilePhotoView }
                 )
-            }.padding()
-            
+                .buttonStyle(PlainButtonStyle())
+            }
+            .listRowBackground(Color.clear)
+            .frame(maxWidth: .infinity)
+            .padding()
             
             Section("What is your pet's name?") {
                 TextField("Name", text: $name)
             }
             
             Section("What is your pet's birthday?") {
-                // We can limit the years to 20 years ago
-                // No reason to load all that data, there's no pet that old xD
                 DatePicker(
                     "Select the date",
                     selection: $birthday,
@@ -66,14 +51,39 @@ struct AddPetProfileView: View {
                     }
                 }
             }
-            
-            Section("Your buddy's nickname") {
-                TextField("Nickname", text: $nickname)
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                nextButton
             }
+        }
+    }
+    
+    private var nextButton: some View {
+        NavigationLink(
+            destination: PetProfileView(),
+            label: { Text("Next").bold() }
+        )
+    }
+    
+    private var addProfilePhotoView: some View {
+        VStack {
+            Image(systemName: "person.crop.circle")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 80, height: 80)
+            
+            Text("Add photo")
+            
+            Text("Optional")
+                .font(.caption)
+                .italic()
         }
     }
 }
 
+#if DEBUG
 #Preview {
     AddPetProfileView()
 }
+#endif
