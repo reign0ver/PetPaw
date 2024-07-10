@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PetPersonalInfoRow: View {
-    let item: PersonalInfoItem
+    let item: PetInfoCategory
     
     var body: some View {
         HStack {
@@ -16,11 +16,7 @@ struct PetPersonalInfoRow: View {
                 title: { Text(item.name) },
                 icon: { Text(item.icon) }
             )
-            Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
         }
-        .padding()
         .contentShape(Rectangle())
     }
 }

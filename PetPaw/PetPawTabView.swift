@@ -16,7 +16,7 @@ struct PetPawTabView: View {
                     Text("Home")
                 }
             
-            MyPetsView()
+            MyPetsListView()
                 .tabItem {
                     Image(systemName: "pawprint")
                     Text("My Pets")

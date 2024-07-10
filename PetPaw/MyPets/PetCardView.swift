@@ -19,7 +19,7 @@ struct PetCardView: View {
                     size: cardSize
                 )
                 
-                Text(pet.breed.emoji)
+                Text(pet.kind.emoji)
                     .font(.title)
                     .padding(6)
                     .background(Color.white)
@@ -34,6 +34,17 @@ struct PetCardView: View {
 }
 #if DEBUG
 #Preview {
-    PetCardView(pet: Pet(name: "Luchito", breed: .cat), cardSize: nil)
+    PetCardView(
+        pet: Pet(
+            name: "Martina",
+            kind: .cat,
+            weight: 4.5,
+            age: 8,
+            profile: PetProfileInfo(
+                bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉"
+            )
+        ),
+        cardSize: nil
+    )
 }
 #endif

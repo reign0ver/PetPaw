@@ -7,99 +7,91 @@
 
 import SwiftUI
 
-// TODOSITO: Naming🤔
-enum PersonalInfoItem {
-    case vaccinate
-    case feeding
-    case treatments
-    case others
-    
-    var icon: String {
-        switch self {
-        case .vaccinate: "💉"
-        case .feeding: "🍪"
-        case .treatments: "🩺"
-        case .others: "❓"
-        }
-    }
-    
-    var name: String {
-        switch self {
-        case .vaccinate: "Mis vacunas"
-        case .feeding: "Mi alimentación"
-        case .treatments: "Mis tratamientos"
-        case .others: "Otros"
-        }
-    }
-}
-
-extension PersonalInfoItem: CaseIterable {}
-
-extension PersonalInfoItem: Identifiable {
-    var id: Self { self }
-}
-
 struct PetProfileView: View {
-    private let items = PersonalInfoItem.allCases
+    let pet: Pet
     
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .listRowSeparatorLeading) {
+        List {
+            Section {
                 headerView()
-                Section(
-                    content: {
-                        ForEach(items, id: \.self) { item in
-                            NavigationLink(
-                                destination: { Text("Detail view") },
-                                label: { PetPersonalInfoRow(item: item) }
-                            )
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                    },
-                    header: {
-                        PetPersonalInfoSectionHeader(title: "About Martina")
-                    }
-                )
+                    .padding(.vertical, 12)
             }
-            .padding()
+            
+            Section("About \(pet.name)") {
+                ForEach(pet.profile.additionalInfo, id: \.self) { item in
+                    NavigationLink(
+                        destination: { PetPersonalInfoRow(item: item) },
+                        label: { PetPersonalInfoRow(item: item) }
+                    )
+                    .buttonStyle(PlainButtonStyle())
+                }
+            }
         }
+        .listStyle(.insetGrouped)
+        .listSectionSpacing(0)
+        .navigationTitle(pet.name)
     }
     
     
     @ViewBuilder
     func headerView() -> some View {
         VStack(spacing: 12) {
-            HStack(alignment: .center) {
-                VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                VStack {
                     CircleImage(
                         image: Image("turtlerock"),
-                        size: CGSize(width: 80, height: 80)
+                        size: CGSize(width: 120, height: 120)
                     )
-                    Text("Martina")
+                    Text(pet.name)
                         .font(.headline)
-                        .foregroundColor(.white)
-                    Text("@LaPeligrosa")
+                    Text("@LaLeona")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
-                //.background(Color.red)
+                
                 Spacer()
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Criollo")
-                    Text("4.5 kg")
-                    Text("8 years and 2 months")
+                
+                HStack(alignment: .center, spacing: 12) {
+                    HStack {
+                        Text(pet.kind.emoji)
+                        Text(pet.kind.name)
+                    }
+                    Divider()
+                    HStack {
+                        Text("🏋🏼‍♀️")
+                        Text(pet.weight, format: .number.precision(.fractionLength(1)))
+                    }
+                    Divider()
+                    HStack {
+                        Text("🐣")
+                        Text("\(pet.age)")
+                    }
                 }
-                .font(.callout)
-                //.background(Color.yellow)
+                .font(.footnote)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .background(Color.gray.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            // Bio
-            Text("Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉")
+            
+            Text(pet.profile.bio)
+                .font(.subheadline)
         }
-        .padding(.horizontal)
     }
 }
 
-
+#if DEBUG
 #Preview {
-    PetProfileView()
+    PetProfileView(
+        pet: Pet(
+            name: "Martina",
+            kind: .cat,
+            weight: 4.5,
+            age: 8,
+            profile: PetProfileInfo(
+                bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉"
+            )
+        )
+    )
 }
+#endif
