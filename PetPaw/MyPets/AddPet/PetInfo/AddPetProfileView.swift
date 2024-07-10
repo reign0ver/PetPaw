@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import PhotosUI
 import Foundation
 
+// TODOSITO: I don't like this name...
+// Pending to change it
 struct AddPetProfileView: View {
     @State private var name = ""
     @State private var birthday = Date.now
@@ -19,6 +22,8 @@ struct AddPetProfileView: View {
     @FocusState private var isNameFocused: Bool
     @FocusState private var isBioFocused: Bool
     
+    @ObservedObject private var viewModel: AddPetInfoModel = AddPetInfoModel()
+    
     private var genderList = [
         "Boy",
         "Girl",
@@ -28,11 +33,7 @@ struct AddPetProfileView: View {
     var body: some View {
         Form {
             Section {
-                Button(
-                    action: {},
-                    label: { addProfilePhotoView }
-                )
-                .buttonStyle(PlainButtonStyle())
+                photosPickerView
             }
             .listRowBackground(Color.clear)
             .frame(maxWidth: .infinity)
@@ -120,10 +121,16 @@ struct AddPetProfileView: View {
     
     private var addProfilePhotoView: some View {
         VStack {
-            Image(systemName: "person.crop.circle")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
+            switch viewModel.imageState {
+            case .empty:
+                defaultPhotosPickerPlaceholder
+            case .loading:
+                ProgressView()
+            case .success(let image):
+                CircleImage(image: image, size: CGSize(width: 80, height: 80))
+            case .failure(_):
+                Text("Ocurrió un error")
+            }
             
             Text("Add photo")
             
@@ -131,6 +138,23 @@ struct AddPetProfileView: View {
                 .font(.caption)
                 .italic()
         }
+    }
+    
+    private var defaultPhotosPickerPlaceholder: some View {
+        Image(systemName: "person.crop.circle")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 80, height: 80)
+    }
+    
+    private var photosPickerView: some View {
+        PhotosPicker(
+            selection: $viewModel.imageSelection,
+            matching: .images,
+            photoLibrary: .shared(),
+            label: { addProfilePhotoView }
+        )
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
