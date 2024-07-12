@@ -8,19 +8,26 @@
 import SwiftUI
 
 struct CircleImage: View {
-    var image: Image
+    @ViewBuilder var image: Image
     var size: CGSize?
     
     var body: some View {
         image
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .scaledToFill()
             .clipShape(Circle())
             .shadow(radius: 6)
             .frame(width: size?.width, height: size?.height)
     }
 }
 
+#if DEBUG
 #Preview {
-    CircleImage(image: Image("turtlerock"), size: CGSize(width: 200, height: 200))
+    CircleImage(
+        image: {
+            Image("turtlerock")
+        },
+        size: CGSize(width: 200, height: 200)
+    )
 }
+#endif

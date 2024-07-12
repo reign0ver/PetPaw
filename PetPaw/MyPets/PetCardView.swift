@@ -9,15 +9,14 @@ import SwiftUI
 
 struct PetCardView: View {
     let pet: Pet
-    let cardSize: CGSize?
     
     var body: some View {
         VStack {
             ZStack(alignment: .bottomTrailing) {
-                CircleImage(
-                    image: Image("turtlerock"), 
-                    size: cardSize
-                )
+                Image("turtlerock")
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(Circle())
                 
                 Text(pet.kind.emoji)
                     .font(.title)
@@ -43,8 +42,7 @@ struct PetCardView: View {
             profile: PetProfileInfo(
                 bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉"
             )
-        ),
-        cardSize: nil
+        )
     )
 }
 #endif

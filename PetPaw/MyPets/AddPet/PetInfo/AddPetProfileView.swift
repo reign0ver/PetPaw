@@ -119,40 +119,14 @@ struct AddPetProfileView: View {
         }
     }
     
-    private var addProfilePhotoView: some View {
-        VStack {
-            switch viewModel.imageState {
-            case .empty:
-                defaultPhotosPickerPlaceholder
-            case .loading:
-                ProgressView()
-            case .success(let image):
-                CircleImage(image: image, size: CGSize(width: 80, height: 80))
-            case .failure(_):
-                Text("Ocurrió un error")
-            }
-            
-            Text("Add photo")
-            
-            Text("Optional")
-                .font(.caption)
-                .italic()
-        }
-    }
-    
-    private var defaultPhotosPickerPlaceholder: some View {
-        Image(systemName: "person.crop.circle")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 80, height: 80)
-    }
-    
     private var photosPickerView: some View {
         PhotosPicker(
             selection: $viewModel.imageSelection,
             matching: .images,
             photoLibrary: .shared(),
-            label: { addProfilePhotoView }
+            label: {
+                EditableCircularPetProfileImageView(viewModel: viewModel)
+            }
         )
         .buttonStyle(PlainButtonStyle())
     }

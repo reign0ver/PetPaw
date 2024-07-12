@@ -17,7 +17,7 @@ struct TextEditorWithPlaceholder: View {
         ZStack(alignment: .topLeading) {
             if text.isEmpty {
                 Text(placeholderText)
-                    .foregroundColor(Color(UIColor.placeholderText))
+                    .foregroundColor(Color(uiColor: .placeholderText))
                     .padding(.horizontal, 8)
                     .padding(.vertical, 12)
             }

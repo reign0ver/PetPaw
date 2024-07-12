@@ -38,10 +38,11 @@ struct PetProfileView: View {
         VStack(spacing: 12) {
             VStack(alignment: .center) {
                 VStack {
-                    CircleImage(
-                        image: Image("turtlerock"),
-                        size: CGSize(width: 120, height: 120)
-                    )
+                    Image("turtlerock")
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .frame(width: 120, height: 120)
                     Text(pet.name)
                         .font(.headline)
                     Text("@LaLeona")

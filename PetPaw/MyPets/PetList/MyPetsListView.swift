@@ -51,7 +51,7 @@ struct MyPetsListView: View {
                     ForEach(pets) { pet in
                         NavigationLink(
                             destination: { PetProfileView(pet: pet) },
-                            label: { PetCardView(pet: pet, cardSize: nil) }
+                            label: { PetCardView(pet: pet) }
                         )
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -66,7 +66,7 @@ struct MyPetsListView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(
                         action: { isPresented = true },
-                        label: { Image(systemName: "plus") }
+                        label: { Image(systemName: "plus.circle.fill") }
                     )
                 }
             }
