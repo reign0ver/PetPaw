@@ -5,6 +5,7 @@
 //  Created by Andrés Carrillo on 5/07/24.
 //
 
+import SwiftUI
 import Foundation
 
 struct Pet: Identifiable {
@@ -19,5 +20,10 @@ struct Pet: Identifiable {
 struct PetProfileInfo: Identifiable {
     let id = UUID()
     let bio: String
+    let profileImage: Image?
     let additionalInfo: [PetInfoCategory] = PetInfoCategory.allCases
+    
+    var unwrappedProfileImage: Image {
+        profileImage ?? Image(systemName: "photo.fill.on.rectangle.fill")
+    }
 }

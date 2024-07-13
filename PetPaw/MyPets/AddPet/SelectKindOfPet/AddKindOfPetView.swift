@@ -10,12 +10,18 @@ import SwiftUI
 struct AddKindOfPetView: View {
     
     @State private var selectedBreed: PetKind?
-    @Binding var isPresented: Bool
+    // TODOSITO: Naming
+    @Binding private var isPresented: Bool
+    @ObservedObject private var appState: AppState
     
     private var breeds = PetKind.allCases
     
-    init(isPresented: Binding<Bool>) {
+    init(
+        isPresented: Binding<Bool>,
+        appState: AppState
+    ) {
         _isPresented = isPresented
+        self.appState = appState
     }
     
     var body: some View {
@@ -66,7 +72,7 @@ struct AddKindOfPetView: View {
     
     private var nextButton: some View {
         NavigationLink(
-            destination: AddPetProfileView(),
+            destination: AddPetProfileView(isPresented: $isPresented, appState: appState),
             label: { Text("Next").bold() }
         )
     }
@@ -81,6 +87,6 @@ struct AddKindOfPetView: View {
 
 #if DEBUG
 #Preview {
-    AddKindOfPetView(isPresented: .constant(true))
+    AddKindOfPetView(isPresented: .constant(true), appState: AppState())
 }
 #endif

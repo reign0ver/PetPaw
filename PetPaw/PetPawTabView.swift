@@ -12,13 +12,13 @@ struct PetPawTabView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Image(systemName: "house")
+                    Image(systemName: "house.circle.fill")
                     Text("Home")
                 }
             
             MyPetsListView()
                 .tabItem {
-                    Image(systemName: "pawprint")
+                    Image(systemName: "pawprint.circle.fill")
                     Text("My Pets")
                 }
             

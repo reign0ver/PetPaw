@@ -23,6 +23,8 @@ final class AddPetInfoModel: ObservableObject {
         }
     }
     
+    private(set) var selectedImage: Image?
+    
     private func loadImage(from imageSelection: PhotosPickerItem) -> Progress {
         return imageSelection.loadTransferable(
             type: TransferableImage.self,
@@ -35,6 +37,7 @@ final class AddPetInfoModel: ObservableObject {
                     switch result {
                     case .success(let profileImage?):
                         self.imageState = .success(profileImage.image)
+                        self.selectedImage = profileImage.image
                     case .success(nil):
                         self.imageState = .empty
                     case .failure(let error):

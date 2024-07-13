@@ -28,24 +28,23 @@ struct PetProfileView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .listSectionSpacing(0)
         .navigationTitle(pet.name)
     }
     
     
     @ViewBuilder
     func headerView() -> some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .center, spacing: 12) {
             VStack(alignment: .center) {
                 VStack {
-                    Image("turtlerock")
+                    pet.profile.unwrappedProfileImage
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())
                         .frame(width: 120, height: 120)
                     Text(pet.name)
                         .font(.headline)
-                    Text("@LaLeona")
+                    Text("@someNickname")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
@@ -77,6 +76,7 @@ struct PetProfileView: View {
             
             Text(pet.profile.bio)
                 .font(.subheadline)
+                .frame(maxWidth: .infinity)
         }
     }
 }
@@ -90,7 +90,8 @@ struct PetProfileView: View {
             weight: 4.5,
             age: 8,
             profile: PetProfileInfo(
-                bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉"
+                bio: "Hola! Soy Martina", 
+                profileImage: Image("turtlerock")
             )
         )
     )

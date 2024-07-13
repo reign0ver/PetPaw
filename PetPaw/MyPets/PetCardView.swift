@@ -11,23 +11,24 @@ struct PetCardView: View {
     let pet: Pet
     
     var body: some View {
-        VStack {
+        HStack {
             ZStack(alignment: .bottomTrailing) {
-                Image("turtlerock")
+                pet.profile.unwrappedProfileImage
                     .resizable()
                     .scaledToFill()
                     .clipShape(Circle())
+                    .frame(width: 80, height: 80)
                 
                 Text(pet.kind.emoji)
-                    .font(.title)
-                    .padding(6)
+                    .font(.footnote)
+                    .padding(4)
                     .background(Color.white)
                     .clipShape(Circle())
                     .shadow(radius: 6)
             }
             
             Text(pet.name)
-                .lineLimit(...1)
+                .lineLimit(1)
         }
     }
 }
@@ -40,7 +41,8 @@ struct PetCardView: View {
             weight: 4.5,
             age: 8,
             profile: PetProfileInfo(
-                bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉"
+                bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉",
+                profileImage: Image("turtlerock")
             )
         )
     )

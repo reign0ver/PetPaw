@@ -12,23 +12,46 @@ import Foundation
 // TODOSITO: I don't like this name...
 // Pending to change it
 struct AddPetProfileView: View {
+    // TODOSITO: Naming
+    @Binding private var isPresented: Bool
+    
     @State private var name = ""
     @State private var birthday = Date.now
     @State private var gender = "Boy"
     @State private var bio = ""
+    @State private var weight: Double?
+    
     @State private var bioCharsExceeded = false
     @State private var isBioEmpty = true
     
     @FocusState private var isNameFocused: Bool
     @FocusState private var isBioFocused: Bool
     
+    @State private var alertMessage: String = ""
+    @State private var showAlert: Bool = false
+    
     @ObservedObject private var viewModel: AddPetInfoModel = AddPetInfoModel()
+    @ObservedObject private var appState: AppState
     
     private var genderList = [
         "Boy",
         "Girl",
         "Other"
     ]
+    
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    init(
+        isPresented: Binding<Bool>,
+        appState: AppState
+    ) {
+        _isPresented = isPresented
+        self.appState = appState
+    }
     
     var body: some View {
         Form {
@@ -40,7 +63,7 @@ struct AddPetProfileView: View {
             .padding()
             
             Section("What is your pet's name?") {
-                TextField("Name", text: $name)
+                TextField("Adamito Carrito Pérez", text: $name)
                     .autocorrectionDisabled()
                     .focused($isNameFocused)
                     .toolbar {
@@ -70,6 +93,11 @@ struct AddPetProfileView: View {
                 }
             }
             
+            Section("Weight") {
+                TextField("4,5", value: $weight, formatter: formatter)
+                    .keyboardType(.decimalPad)
+            }
+            
             Section("Bio") {
                 TextEditorWithCharCounter(
                     text: $bio,
@@ -93,19 +121,29 @@ struct AddPetProfileView: View {
                     hideKeyboard()
                 }
         }
+        .alert(
+            isPresented: $showAlert,
+            content: {
+                Alert(
+                    title: Text("Congrats"),
+                    message: Text("Your pet was added successfully"), // Copy, tengo sueño
+                    dismissButton: .default(Text("Done").bold(), action: dismissModal)
+                )
+            }
+        )
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                nextButton
+                finishButton
                     .disabled(name.isEmpty || isBioEmpty || bioCharsExceeded)
             }
         }
     }
     
-    private var nextButton: some View {
-        NavigationLink(
-            destination: Text("Pending to implement"),
-            label: { Text("Next").bold() }
+    private var finishButton: some View {
+        Button(
+            action: { showAlert = true },
+            label: { Text("Finish").bold() }
         )
     }
     
@@ -130,6 +168,21 @@ struct AddPetProfileView: View {
         )
         .buttonStyle(PlainButtonStyle())
     }
+    
+    private func dismissModal() {
+        isPresented = false
+        appState.pets.append(getPetInfo())
+    }
+    
+    private func getPetInfo() -> Pet {
+        Pet(
+            name: name,
+            kind: .cat, // comes from the previous screen
+            weight: weight ?? 1,
+            age: 4, // calculate from date
+            profile: PetProfileInfo(bio: bio, profileImage: viewModel.selectedImage)
+        )
+    }
 }
 
 extension View {
@@ -140,6 +193,6 @@ extension View {
 
 #if DEBUG
 #Preview {
-    AddPetProfileView()
+    AddPetProfileView(isPresented: .constant(true), appState: AppState())
 }
 #endif
