@@ -21,6 +21,7 @@
 		0B90BE982C3F345000DF33A9 /* EditableCircularPetProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B90BE972C3F345000DF33A9 /* EditableCircularPetProfileImageView.swift */; };
 		0BA563092C36650C0066E127 /* PetPersonalInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA563082C36650C0066E127 /* PetPersonalInfoRow.swift */; };
 		0BBC81892C4204C20064E501 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBC81882C4204C20064E501 /* AppState.swift */; };
+		0BBC818B2C42F6D70064E501 /* ImagePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBC818A2C42F6D70064E501 /* ImagePreviewer.swift */; };
 		0BD7C8852BBB2B0E00C6F537 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7C8842BBB2B0E00C6F537 /* HomeView.swift */; };
 		0BD7C8872BBB2B5800C6F537 /* MyPetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7C8862BBB2B5800C6F537 /* MyPetsListView.swift */; };
 		0BD7C8892BBB2B8700C6F537 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7C8882BBB2B8700C6F537 /* MyProfileView.swift */; };
@@ -68,6 +69,7 @@
 		0B90BE972C3F345000DF33A9 /* EditableCircularPetProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableCircularPetProfileImageView.swift; sourceTree = "<group>"; };
 		0BA563082C36650C0066E127 /* PetPersonalInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPersonalInfoRow.swift; sourceTree = "<group>"; };
 		0BBC81882C4204C20064E501 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		0BBC818A2C42F6D70064E501 /* ImagePreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewer.swift; sourceTree = "<group>"; };
 		0BD7C8842BBB2B0E00C6F537 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0BD7C8862BBB2B5800C6F537 /* MyPetsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetsListView.swift; sourceTree = "<group>"; };
 		0BD7C8882BBB2B8700C6F537 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				0BD7C88F2BBE0B1000C6F537 /* CircleImage.swift */,
 				0B90BE8F2C3C41F000DF33A9 /* TextEditorWithPlaceholder.swift */,
 				0B90BE912C3ECA4E00DF33A9 /* TextEditorWithCharCounter.swift */,
+				0BBC818A2C42F6D70064E501 /* ImagePreviewer.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				0B90BE982C3F345000DF33A9 /* EditableCircularPetProfileImageView.swift in Sources */,
 				0BE2B42D2C388EDA0095D4DB /* PetKind.swift in Sources */,
 				0B90BE962C3EF92900DF33A9 /* AddPetInfoModel.swift in Sources */,
+				0BBC818B2C42F6D70064E501 /* ImagePreviewer.swift in Sources */,
 				0BE2B42B2C38880C0095D4DB /* PetInfoCategory.swift in Sources */,
 				0BA563092C36650C0066E127 /* PetPersonalInfoRow.swift in Sources */,
 				0BD7C8932BD766C500C6F537 /* AddKindOfPetView.swift in Sources */,

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PetProfileView: View {
+    @State private var fullscreenProfilePicturePresented = false
+    
     let pet: Pet
     
     var body: some View {
@@ -42,6 +44,12 @@ struct PetProfileView: View {
                         .scaledToFill()
                         .clipShape(Circle())
                         .frame(width: 120, height: 120)
+                        .sheet(isPresented: $fullscreenProfilePicturePresented, content: {
+                            ImagePreviewer(image: pet.profile.unwrappedProfileImage)
+                        })
+                        .onTapGesture {
+                            fullscreenProfilePicturePresented = true
+                        }
                     Text(pet.name)
                         .font(.headline)
                     Text("@someNickname")
