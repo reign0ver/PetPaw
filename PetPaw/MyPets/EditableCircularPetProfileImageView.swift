@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditableCircularPetProfileImageView: View {
-    @ObservedObject var viewModel: AddPetInfoModel
+    @ObservedObject var viewModel: PetDetailsViewModel
     
     var body: some View {
         switch viewModel.imageState {
@@ -68,6 +68,6 @@ struct EditableCircularPetProfileImageView: View {
 
 #if DEBUG
 #Preview {
-    EditableCircularPetProfileImageView(viewModel: AddPetInfoModel())
+    EditableCircularPetProfileImageView(viewModel: PetDetailsViewModel())
 }
 #endif

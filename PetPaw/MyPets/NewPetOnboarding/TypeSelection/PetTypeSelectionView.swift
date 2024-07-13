@@ -1,5 +1,5 @@
 //
-//  AddKindOfPetView.swift
+//  PetTypeSelectionView.swift
 //  PetPaw
 //
 //  Created by Andrés Carrillo on 22/04/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddKindOfPetView: View {
+struct PetTypeSelectionView: View {
     @ObservedObject private var appState: AppState
     
     @Binding private var isPresented: Bool
@@ -46,7 +46,7 @@ struct AddKindOfPetView: View {
                     nextButton
                         .disabled(selectedKind == nil)
                 }
-                
+
                 ToolbarItem(placement: .topBarLeading) {
                     cancelButton
                 }
@@ -56,7 +56,7 @@ struct AddKindOfPetView: View {
     
     private var nextButton: some View {
         NavigationLink(
-            destination: AddPetProfileView(isPresented: $isPresented, appState: appState),
+            destination: PetDetailsEntryView(isPresented: $isPresented, appState: appState),
             label: { Text("Next").bold() }
         )
     }
@@ -71,6 +71,6 @@ struct AddKindOfPetView: View {
 
 #if DEBUG
 #Preview {
-    AddKindOfPetView(isPresented: .constant(true), appState: AppState())
+    PetTypeSelectionView(isPresented: .constant(true), appState: AppState())
 }
 #endif

@@ -24,7 +24,7 @@ struct MyPetsListView: View {
             }
             .navigationTitle("My Pets")
             .sheet(isPresented: $isPresented, content: {
-                AddKindOfPetView(isPresented: $isPresented, appState: appState)
+                PetTypeSelectionView(isPresented: $isPresented, appState: appState)
             })
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

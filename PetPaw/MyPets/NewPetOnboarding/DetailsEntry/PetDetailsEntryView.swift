@@ -1,5 +1,5 @@
 //
-//  AddPetProfileView.swift
+//  PetDetailsEntryView.swift
 //  PetPaw
 //
 //  Created by Andrés Carrillo on 22/04/24.
@@ -9,9 +9,7 @@ import SwiftUI
 import PhotosUI
 import Foundation
 
-// TODOSITO: I don't like this name...
-// Pending to change it
-struct AddPetProfileView: View {
+struct PetDetailsEntryView: View {
     // TODOSITO: Naming
     @Binding private var isPresented: Bool
     
@@ -30,7 +28,7 @@ struct AddPetProfileView: View {
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
     
-    @ObservedObject private var viewModel: AddPetInfoModel = AddPetInfoModel()
+    @ObservedObject private var viewModel: PetDetailsViewModel = PetDetailsViewModel()
     @ObservedObject private var appState: AppState
     
     private var genderList = [
@@ -193,6 +191,6 @@ extension View {
 
 #if DEBUG
 #Preview {
-    AddPetProfileView(isPresented: .constant(true), appState: AppState())
+    PetDetailsEntryView(isPresented: .constant(true), appState: AppState())
 }
 #endif

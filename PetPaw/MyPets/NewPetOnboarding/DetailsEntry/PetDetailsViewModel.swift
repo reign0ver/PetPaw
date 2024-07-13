@@ -1,5 +1,5 @@
 //
-//  AddPetInfoModel.swift
+//  PetDetailsViewModel.swift
 //  PetPaw
 //
 //  Created by Andrés Carrillo on 10/07/24.
@@ -10,7 +10,7 @@ import PhotosUI
 import Foundation
 import CoreTransferable
 
-final class AddPetInfoModel: ObservableObject {
+final class PetDetailsViewModel: ObservableObject {
     @Published private(set) var imageState: ImageState = .empty
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
@@ -49,7 +49,7 @@ final class AddPetInfoModel: ObservableObject {
     }
 }
 
-extension AddPetInfoModel {
+extension PetDetailsViewModel {
     struct TransferableImage: Transferable {
         let image: Image
         
@@ -65,7 +65,7 @@ extension AddPetInfoModel {
     }
 }
 
-extension AddPetInfoModel {
+extension PetDetailsViewModel {
     enum ImageState {
         case empty
         case loading
