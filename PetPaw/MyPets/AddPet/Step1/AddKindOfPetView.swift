@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct AddKindOfPetView: View {
-    
-    @State private var selectedBreed: PetKind?
-    // TODOSITO: Naming
-    @Binding private var isPresented: Bool
     @ObservedObject private var appState: AppState
     
-    private var breeds = PetKind.allCases
+    @Binding private var isPresented: Bool
+    @State private var selectedKind: PetKind?
     
     init(
         isPresented: Binding<Bool>,
@@ -34,24 +31,11 @@ struct AddKindOfPetView: View {
                 }
                 .listRowBackground(Color.clear)
                 
-                ForEach(breeds, id: \.self) { breed in
-                    HStack {
-                        Label(
-                            title: { Text(breed.name) },
-                            icon: { Text(breed.emoji) }
-                        )
-                        Spacer()
-                        if selectedBreed == breed {
-                            // Would be a good idea to have an enum to initialize SF Symbols
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        guard selectedBreed != breed else { return }
-                        selectedBreed = breed
-                    }
+                ForEach(PetKind.allCases, id: \.self) { kind in
+                    SelectablePetTypeRow(
+                        petType: kind,
+                        selectedType: $selectedKind
+                    )
                 }
             }
             .listStyle(.insetGrouped)
@@ -60,7 +44,7 @@ struct AddKindOfPetView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     nextButton
-                        .disabled(selectedBreed == nil)
+                        .disabled(selectedKind == nil)
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {

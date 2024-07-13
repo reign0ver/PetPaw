@@ -22,6 +22,7 @@
 		0BA563092C36650C0066E127 /* PetPersonalInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA563082C36650C0066E127 /* PetPersonalInfoRow.swift */; };
 		0BBC81892C4204C20064E501 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBC81882C4204C20064E501 /* AppState.swift */; };
 		0BBC818B2C42F6D70064E501 /* ImagePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBC818A2C42F6D70064E501 /* ImagePreviewer.swift */; };
+		0BBC818D2C4317920064E501 /* SelectablePetTypeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBC818C2C4317920064E501 /* SelectablePetTypeRow.swift */; };
 		0BD7C8852BBB2B0E00C6F537 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7C8842BBB2B0E00C6F537 /* HomeView.swift */; };
 		0BD7C8872BBB2B5800C6F537 /* MyPetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7C8862BBB2B5800C6F537 /* MyPetsListView.swift */; };
 		0BD7C8892BBB2B8700C6F537 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD7C8882BBB2B8700C6F537 /* MyProfileView.swift */; };
@@ -70,6 +71,7 @@
 		0BA563082C36650C0066E127 /* PetPersonalInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPersonalInfoRow.swift; sourceTree = "<group>"; };
 		0BBC81882C4204C20064E501 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0BBC818A2C42F6D70064E501 /* ImagePreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewer.swift; sourceTree = "<group>"; };
+		0BBC818C2C4317920064E501 /* SelectablePetTypeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectablePetTypeRow.swift; sourceTree = "<group>"; };
 		0BD7C8842BBB2B0E00C6F537 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0BD7C8862BBB2B5800C6F537 /* MyPetsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetsListView.swift; sourceTree = "<group>"; };
 		0BD7C8882BBB2B8700C6F537 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
@@ -189,21 +191,22 @@
 			path = PetProfile;
 			sourceTree = "<group>";
 		};
-		0B90BE932C3EF8D900DF33A9 /* SelectKindOfPet */ = {
+		0B90BE932C3EF8D900DF33A9 /* Step1 */ = {
 			isa = PBXGroup;
 			children = (
 				0BD7C8922BD766C500C6F537 /* AddKindOfPetView.swift */,
+				0BBC818C2C4317920064E501 /* SelectablePetTypeRow.swift */,
 			);
-			path = SelectKindOfPet;
+			path = Step1;
 			sourceTree = "<group>";
 		};
-		0B90BE942C3EF8EC00DF33A9 /* PetInfo */ = {
+		0B90BE942C3EF8EC00DF33A9 /* Step2 */ = {
 			isa = PBXGroup;
 			children = (
 				0BD7C8942BD7708200C6F537 /* AddPetProfileView.swift */,
 				0B90BE952C3EF92900DF33A9 /* AddPetInfoModel.swift */,
 			);
-			path = PetInfo;
+			path = Step2;
 			sourceTree = "<group>";
 		};
 		0BD7C88A2BBE084200C6F537 /* Home */ = {
@@ -237,8 +240,8 @@
 		0BD7C8912BD7667300C6F537 /* AddPet */ = {
 			isa = PBXGroup;
 			children = (
-				0B90BE942C3EF8EC00DF33A9 /* PetInfo */,
-				0B90BE932C3EF8D900DF33A9 /* SelectKindOfPet */,
+				0B90BE942C3EF8EC00DF33A9 /* Step2 */,
+				0B90BE932C3EF8D900DF33A9 /* Step1 */,
 			);
 			path = AddPet;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			files = (
 				0B90BE922C3ECA4E00DF33A9 /* TextEditorWithCharCounter.swift in Sources */,
 				0BD7C8892BBB2B8700C6F537 /* MyProfileView.swift in Sources */,
+				0BBC818D2C4317920064E501 /* SelectablePetTypeRow.swift in Sources */,
 				0B4F225A2C0E497D007C5BE6 /* PetProfileView.swift in Sources */,
 				0BD7C8952BD7708200C6F537 /* AddPetProfileView.swift in Sources */,
 				0B90BE982C3F345000DF33A9 /* EditableCircularPetProfileImageView.swift in Sources */,

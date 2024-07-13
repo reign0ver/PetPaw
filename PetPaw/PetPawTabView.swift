@@ -19,13 +19,13 @@ struct PetPawTabView: View {
             MyPetsListView()
                 .tabItem {
                     Image(systemName: "pawprint.circle.fill")
-                    Text("My Pets")
+                    Text("Pets")
                 }
             
             MyProfileView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
-                    Text("My Profile")
+                    Text("Profile")
                 }
         }
     }
