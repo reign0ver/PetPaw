@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PetProfileView: View {
     @State private var fullscreenProfilePicturePresented = false
-    
     let pet: Pet
     
     var body: some View {
@@ -20,7 +19,7 @@ struct PetProfileView: View {
             }
             
             Section("About \(pet.name)") {
-                ForEach(pet.profile.additionalInfo, id: \.self) { item in
+                ForEach(PetInfoCategory.allCases, id: \.self) { item in
                     NavigationLink(
                         destination: { PetPersonalInfoRow(item: item) },
                         label: { PetPersonalInfoRow(item: item) }

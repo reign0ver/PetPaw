@@ -21,7 +21,6 @@ struct PetProfileInfo: Identifiable {
     let id = UUID()
     let bio: String
     let profileImage: Image?
-    let additionalInfo: [PetInfoCategory] = PetInfoCategory.allCases
     
     var unwrappedProfileImage: Image {
         profileImage ?? Image(systemName: "photo.fill.on.rectangle.fill")

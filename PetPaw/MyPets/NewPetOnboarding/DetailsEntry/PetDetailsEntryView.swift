@@ -10,9 +10,6 @@ import PhotosUI
 import Foundation
 
 struct PetDetailsEntryView: View {
-    // TODOSITO: Naming
-    @Binding private var isPresented: Bool
-    
     @State private var name = ""
     @State private var birthday = Date.now
     @State private var gender = "Boy"
@@ -25,11 +22,12 @@ struct PetDetailsEntryView: View {
     @FocusState private var isNameFocused: Bool
     @FocusState private var isBioFocused: Bool
     
-    @State private var alertMessage: String = ""
-    @State private var showAlert: Bool = false
+    @State private var alertMessage = ""
+    @State private var showAlert = false
     
-    @ObservedObject private var viewModel: PetDetailsViewModel = PetDetailsViewModel()
     @ObservedObject private var appState: AppState
+    @ObservedObject private var coordinator: PetOnboardingCoordinator
+    @ObservedObject private var viewModel: PetDetailsViewModel = PetDetailsViewModel()
     
     private var genderList = [
         "Boy",
@@ -37,6 +35,7 @@ struct PetDetailsEntryView: View {
         "Other"
     ]
     
+    #warning("Refactor this and all @State properties from this View")
     private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -44,11 +43,11 @@ struct PetDetailsEntryView: View {
     }()
     
     init(
-        isPresented: Binding<Bool>,
-        appState: AppState
+        appState: AppState,
+        coordinator: PetOnboardingCoordinator
     ) {
-        _isPresented = isPresented
         self.appState = appState
+        self.coordinator = coordinator
     }
     
     var body: some View {
@@ -168,7 +167,7 @@ struct PetDetailsEntryView: View {
     }
     
     private func dismissModal() {
-        isPresented = false
+        coordinator.complete()
         appState.pets.append(getPetInfo())
     }
     
@@ -191,6 +190,6 @@ extension View {
 
 #if DEBUG
 #Preview {
-    PetDetailsEntryView(isPresented: .constant(true), appState: AppState())
+    PetDetailsEntryView(appState: AppState(), coordinator: PetOnboardingCoordinator())
 }
 #endif

@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct MyPetsListView: View {
-    @ObservedObject private var appState: AppState = AppState()
-    
-    @State private var isPresented = false
+    @StateObject private var appState: AppState = AppState()
+    @StateObject private var coordinator = PetOnboardingCoordinator()
     
     var body: some View {
         NavigationStack {
@@ -23,14 +22,14 @@ struct MyPetsListView: View {
                 }
             }
             .navigationTitle("My Pets")
-            .sheet(isPresented: $isPresented, content: {
-                PetTypeSelectionView(isPresented: $isPresented, appState: appState)
+            .sheet(isPresented: $coordinator.isActive, content: {
+                OnboardingContainerView(appState: appState, coordinator: coordinator)
             })
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(
-                        action: { isPresented = true },
-                        label: { 
+                        action: { coordinator.start() },
+                        label: {
                             Image(systemName: "plus")
                         }
                     )
