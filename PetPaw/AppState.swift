@@ -16,7 +16,7 @@ class AppState: ObservableObject {
             name: "Martina",
             kind: .cat,
             weight: 4.5,
-            age: 8,
+            birthdayDate: .someRandomPastDate,
             profile: PetProfileInfo(
                 bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉",
                 profileImage: Image("turtlerock")
@@ -26,7 +26,7 @@ class AppState: ObservableObject {
             name: "Chispita",
             kind: .cat,
             weight: 4.5,
-            age: 9,
+            birthdayDate: .someRandomPastDate,
             profile: PetProfileInfo(
                 bio: "Hola! Soy Chispita, una gatita albina de 9 años. Soy un poco nerviosa pero muy amorosa, hace poquito me dejaron sin dientes pero me veo muy linda muequita❤️",
                 profileImage: Image("turtlerock")
@@ -36,7 +36,7 @@ class AppState: ObservableObject {
             name: "Mili",
             kind: .cat,
             weight: 4.5,
-            age: 10,
+            birthdayDate: .someRandomPastDate,
             profile: PetProfileInfo(
                 bio: "Hola! Soy Mili, tengo 10 añitos, soy una gata muy peluda, digo que soy angora pero no sé si lo soy😜. Soy muy interesada, solo doy amor a cambio de Churu😾",
                 profileImage: Image("turtlerock")

@@ -25,8 +25,12 @@ struct OnboardingContainerView: View {
                         switch step {
                         case .typeSelection:
                             PetTypeSelectionView(appState: appState, coordinator: coordinator)
-                        case .detailsEntry:
-                            PetDetailsEntryView(appState: appState, coordinator: coordinator)
+                        case .detailsEntry(let petKind):
+                            PetDetailsEntryView(
+                                petKind: petKind,
+                                appState: appState,
+                                coordinator: coordinator
+                            )
                         }
                     }
                 )

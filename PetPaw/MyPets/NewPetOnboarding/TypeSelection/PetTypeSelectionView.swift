@@ -38,7 +38,6 @@ struct PetTypeSelectionView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .navigationTitle("New pet")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -54,7 +53,9 @@ struct PetTypeSelectionView: View {
     
     private var nextButton: some View {
         Button(
-            action: { coordinator.moveToNextStep() },
+            action: {
+                coordinator.moveTo(step: .detailsEntry(petKind: selectedKind ?? .other))
+            },
             label: { Text("Next").bold() }
         )
     }

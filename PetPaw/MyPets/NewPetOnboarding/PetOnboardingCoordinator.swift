@@ -9,31 +9,32 @@ import SwiftUI
 
 final class PetOnboardingCoordinator: ObservableObject {
     @Published var isActive = false
-    @Published var navigationPath = NavigationPath()
+    @Published var canProceed = false
+    @Published var navigationPath: [OnboardingStep] = []
     
     func start() {
         isActive = true
-        navigationPath = NavigationPath()
+        navigationPath = []
     }
     
     func cancel() {
         isActive = false
-        navigationPath = NavigationPath()
+        navigationPath = []
     }
     
     func complete() {
         isActive = false
-        navigationPath = NavigationPath()
+        navigationPath = []
     }
     
-    func moveToNextStep() {
-        navigationPath.append(OnboardingStep.detailsEntry)
+    func moveTo(step: OnboardingStep) {
+        navigationPath.append(step)
     }
 }
 
 extension PetOnboardingCoordinator {
     enum OnboardingStep: Hashable {
         case typeSelection
-        case detailsEntry
+        case detailsEntry(petKind: PetKind)
     }
 }

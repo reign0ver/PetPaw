@@ -71,7 +71,7 @@ struct PetProfileView: View {
                     Divider()
                     HStack {
                         Text("🐣")
-                        Text("\(pet.age)")
+                        Text("\(pet.age.years)")
                     }
                 }
                 .font(.footnote)
@@ -95,7 +95,7 @@ struct PetProfileView: View {
             name: "Martina",
             kind: .cat,
             weight: 4.5,
-            age: 8,
+            birthdayDate: Date.now,
             profile: PetProfileInfo(
                 bio: "Hola! Soy Martina", 
                 profileImage: Image("turtlerock")

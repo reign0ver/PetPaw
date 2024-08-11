@@ -14,7 +14,7 @@ struct PetDetailsEntryView: View {
     @State private var birthday = Date.now
     @State private var gender = "Boy"
     @State private var bio = ""
-    @State private var weight: Double?
+    @State private var weight: Double = 1
     
     @State private var bioCharsExceeded = false
     @State private var isBioEmpty = true
@@ -35,17 +35,14 @@ struct PetDetailsEntryView: View {
         "Other"
     ]
     
-    #warning("Refactor this and all @State properties from this View")
-    private let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
+    private let petKind: PetKind
     
     init(
+        petKind: PetKind,
         appState: AppState,
         coordinator: PetOnboardingCoordinator
     ) {
+        self.petKind = petKind
         self.appState = appState
         self.coordinator = coordinator
     }
@@ -91,8 +88,13 @@ struct PetDetailsEntryView: View {
             }
             
             Section("Weight") {
-                TextField("4,5", value: $weight, formatter: formatter)
-                    .keyboardType(.decimalPad)
+                TextField(
+                    "Localized",
+                    value: $weight,
+                    format: .number,
+                    prompt: Text("Prompt 1,5")
+                )
+                .keyboardType(.decimalPad)
             }
             
             Section("Bio") {
@@ -102,11 +104,9 @@ struct PetDetailsEntryView: View {
                     height: 120,
                     maxLength: 240,
                     onMaxLengthExceeded: { exceeded in
-                        print("exceeded", exceeded)
                         bioCharsExceeded = exceeded
                     },
                     onEmpty: { isEmpty in
-                        print("isBioEmpty", isEmpty)
                         isBioEmpty = isEmpty
                     }
                 )
@@ -114,9 +114,6 @@ struct PetDetailsEntryView: View {
             
             Spacer()
                 .listRowBackground(Color.clear)
-                .onTapGesture {
-                    hideKeyboard()
-                }
         }
         .alert(
             isPresented: $showAlert,
@@ -174,22 +171,16 @@ struct PetDetailsEntryView: View {
     private func getPetInfo() -> Pet {
         Pet(
             name: name,
-            kind: .cat, // comes from the previous screen
-            weight: weight ?? 1,
-            age: 4, // calculate from date
+            kind: petKind,
+            weight: weight,
+            birthdayDate: birthday,
             profile: PetProfileInfo(bio: bio, profileImage: viewModel.selectedImage)
         )
     }
 }
 
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
 #if DEBUG
 #Preview {
-    PetDetailsEntryView(appState: AppState(), coordinator: PetOnboardingCoordinator())
+    PetDetailsEntryView(petKind: .cat, appState: AppState(), coordinator: PetOnboardingCoordinator())
 }
 #endif

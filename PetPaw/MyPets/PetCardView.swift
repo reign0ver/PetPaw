@@ -17,7 +17,7 @@ struct PetCardView: View {
                     .resizable()
                     .scaledToFill()
                     .clipShape(Circle())
-                    .frame(width: 80, height: 80)
+                    .frame(width: 56, height: 56)
                 
                 Text(pet.kind.emoji)
                     .font(.footnote)
@@ -39,7 +39,7 @@ struct PetCardView: View {
             name: "Martina",
             kind: .cat,
             weight: 4.5,
-            age: 8,
+            birthdayDate: .now,
             profile: PetProfileInfo(
                 bio: "Hola! Soy Martina, la gata más bonita de mi casita. Mi papá adoptivo diría que es Lusho, pero es mentira, yo soy, Lusho es feo y cansón 😉",
                 profileImage: Image("turtlerock")
